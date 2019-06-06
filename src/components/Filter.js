@@ -20,7 +20,9 @@ const Filters = ({ filterName, allQuakes, listedQuakes, setQuakes }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="magnitude">Filter by {filterName}: </label>
+      <label style={{ color: 'blue' }} htmlFor="magnitude">
+        Filter by{filterName}:{' '}
+      </label>
       <input id="magnitude" type="text" onChange={handleChange} />
       <button>Filter</button>
     </form>

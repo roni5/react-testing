@@ -1,8 +1,9 @@
-import 'whatwg-fetch';
+// import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import { endpoint } from '../api/endpoint';
 import { earthdata } from '../api/earthData';
 
-const fetchQuakes = () => fetch(endpoint);
+const fetchEarth = () => fetch(endpoint);
 
 const parseQuakes = (response, reject) =>
   response.json().then(json => {
@@ -13,4 +14,4 @@ const parseQuakes = (response, reject) =>
     return quakes;
   });
 
-export { fetchQuakes, parseQuakes };
+export { fetchEarth, parseQuakes };

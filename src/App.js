@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Quakes from './components/Quakes';
 import EmptyList from './components/EmptyList';
 import Filter from './components/Filter';
-// import logo from './logo.svg';
+import CheckboxWithLabel from './components/link/CheckboxWithLabel';
+import Link from './components/link/Link.react';
+import logo from './logo.svg';
 import './App.css';
-import { fetchQuakes, parseQuakes } from './service/fetchEarth';
+import { fetchEarth, parseQuakes } from './service/fetchEarth';
 
 class App extends Component {
   constructor() {
@@ -16,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetchQuakes()
+    fetchEarth()
       .then(parseQuakes)
       .then(quakes => {
         this.cacheQuakes(quakes);
@@ -34,27 +36,41 @@ class App extends Component {
   }
 
   handleError(error) {
-    // LOG ERRORS
+    console.log(error);
   }
 
   render() {
     return (
       <div>
-        <h2>Where Earthquakes have happened</h2>
-        <Filter
-          filterName="mag"
-          allQuakes={this.allQuakes}
-          listedQuakes={this.state.quakes}
-          setQuakes={this.setQuakes}
-        />
-        <Filter
-          filterName="magType"
-          allQuakes={this.allQuakes}
-          listedQuakes={this.state.quakes}
-          setQuakes={this.setQuakes}
-        />
-        <Quakes quakes={this.state.quakes} />
-        <EmptyList quakes={this.state.quakes} />
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <CheckboxWithLabel />
+          </header>
+          <div>
+            <Link />
+            <h2>Filter Earthquakes Magnitude </h2>
+            <h3>and types of Magnitude</h3>
+            <p>md = Based on the duration of shaking</p>
+            <p>ml = based on the maximum amplitude</p>
+          </div>
+        </div>
+        <div className="App-body">
+          <Filter
+            filterName="mag"
+            allQuakes={this.allQuakes}
+            listedQuakes={this.state.quakes}
+            setQuakes={this.setQuakes}
+          />
+          <Filter
+            filterName="magType"
+            allQuakes={this.allQuakes}
+            listedQuakes={this.state.quakes}
+            setQuakes={this.setQuakes}
+          />
+          <Quakes quakes={this.state.quakes} />
+          <EmptyList quakes={this.state.quakes} />
+        </div>
       </div>
     );
   }

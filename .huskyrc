@@ -1,5 +1,7 @@
 {
   "hooks": {
-    "pre-commit": "  NODE_ENV=production lint-staged && npm run lint:fix"
+    "pre-commit": " NODE_ENV=production lint-staged ",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+    "pre-push": "npm test"
   }
 }
